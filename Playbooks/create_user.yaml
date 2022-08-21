@@ -14,6 +14,12 @@
           groups:
             - wheel
           state: present
+          
+      - name: Create a directory if it does not exist
+        ansible.builtin.file:
+          path: '~/.ssh/'
+          state: directory
+          mode: '0755'
 
       - name: Add public key to authorized_keys
         authorized_key:
