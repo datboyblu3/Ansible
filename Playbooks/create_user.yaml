@@ -1,5 +1,5 @@
 ---
-- name: Create user on linux server
+- name: Create user on Ubuntu
   hosts: remote-server
   become: yes
   gather_facts: false
@@ -12,7 +12,7 @@
           name: "{{ user }}"
           password: "{{ password }}"
           groups:
-            - wheel
+            - sudo
           state: present
           
       - name: Add {{ user }} to sudoers file
