@@ -7,8 +7,15 @@
 		- curl
 		- synaptic
 		- timeshift
-    		- simplescreenrecorder
+    	- simplescreenrecorder
 		- suricata
 		- zeek
 	
 	tasks:
+		- 
+			apt:
+				name: '{{ item }}'
+				state: present
+				update_cache: yes
+			with_item: '{{ packages }}'
+				
