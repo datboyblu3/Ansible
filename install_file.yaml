@@ -1,1 +1,14 @@
-
+-
+	name: 'Install security tools'
+	hosts: all
+	become: yes
+	vars:
+		packages:
+		- curl
+		- synaptic
+		- timeshift
+    		- simplescreenrecorder
+		- suricata
+		- zeek
+	
+	tasks:
