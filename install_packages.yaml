@@ -16,3 +16,24 @@
               update_cache: yes
           when_items: '{{ packages }}'
           when: ansible_os_family == 'Debian'
+
+
+
+-
+    name: 'Install security tools on RedHat systems'
+    hosts: Centos
+    become: true
+    vars:
+        packages:
+        - zeek
+        - suricata
+        - vim
+        
+    tasks:
+        -
+          yum:
+              name: '{{ item }}'
+              state: present
+              update_cache: yes
+          when_items: '{{ packages }}'
+          when: ansible_os_family == 'Centos'
