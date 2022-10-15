@@ -1,6 +1,6 @@
 -
 	name: 'Install security tools on Debian systems'
-	hosts: all
+	hosts: Ubuntu
 	become: yes
 	vars:
 		packages:
@@ -23,7 +23,7 @@
 
 -
 	name: 'Install security tools on RedHat systems'
-	hosts: all
+	hosts: Centos
 	become: yes
 	vars:
 		packages:
