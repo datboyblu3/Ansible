@@ -1,5 +1,5 @@
 -
-	name: 'Install security tools'
+	name: 'Install security tools on Debian systems'
 	hosts: all
 	become: yes
 	vars:
@@ -7,9 +7,9 @@
 		- curl
 		- synaptic
 		- timeshift
-    	- simplescreenrecorder
 		- suricata
 		- zeek
+		- vim
 	
 	tasks:
 		- 
@@ -19,4 +19,27 @@
 				update_cache: yes
 			with_items: '{{ packages }}'
 			when: ansible_os_family == 'Debian'
+			
+
+-
+	name: 'Install security tools on RedHat systems'
+	hosts: all
+	become: yes
+	vars:
+		packages:
+		- curl
+		- synaptic
+		- timeshift
+		- suricata
+		- zeek
+		- vim
+	
+	tasks:
+		- 
+			yum:
+				name: '{{ item }}'
+				state: present
+				update_cache: yes
+			with_items: '{{ packages }}'
+			when: ansible_os_family == 'RedHat'
 				
