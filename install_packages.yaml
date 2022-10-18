@@ -7,7 +7,7 @@
         - zeek
         - suricata
         - vim
-        - net-tools
+        
         
     tasks:
         -
