@@ -2,8 +2,14 @@
 - hosts: all
   become: true
   tasks:
-    - name: On all Debian flavors, update cache and make sure Vim is installed
+    - name: Update cache, ensure Vim is installed on Debian systems
       apt:
         name: vim
         update_cache: yes
       when: ansible_facts['os_family'] == "Debian"
+
+    - name: Update cache, ensure Vim is installed on Red Hat systems
+      apt:
+        name: vim
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Red Hat"
