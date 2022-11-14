@@ -9,7 +9,7 @@
       when: ansible_facts['os_family'] == "Debian"
 
     - name: Update cache, ensure Vim is installed on Red Hat systems
-      apt:
+      yum:
         name: vim
         update_cache: yes
       when: ansible_facts['os_family'] == "Red Hat"
