@@ -1,41 +1,24 @@
--
-    name: 'Install security tools on Debian systems'
-    hosts: Ubuntu
-    become: true
-    vars:
-        packages:
-        - zeek
-        - suricata
-        
-        
-    tasks:
-        -
-          apt:
-              name: '{{ item }}'
-              state: present
-              update_cache: yes
-          msg: Installing zeek and suricata on Debian
-          when_items: '{{ packages }}'
-          when: ansible_os_family == 'Debian'
+---
+- hosts: all
+  become: true
+  vars:
+      packages:
+      - zeek
+      - suricata
+      - net-tools
+  tasks:
+    - name: Install security tools on Debian systems
+      apt:
+         latest: present
+         update_cache: yes
+      with_items: '{{ packages }}'
+      when: ansible_os_family == 'Debian'
 
 
 
--
-    name: 'Install security tools on RedHat systems'
-    hosts: Centos
-    become: true
-    vars:
-        packages:
-        - zeek
-        - suricata
-        - net-tools
-        
-    tasks:
-        -
-          yum:
-              name: '{{ item }}'
-              state: present
-              update_cache: yes
-          msg: Installing zeek, suricata and net-tools
-          when_items: '{{ packages }}'
-          when: ansible_os_family == 'Centos'
+    - name: Install security tools on RedHat systems
+      yum:
+         latest: present
+         update_cache: yes
+      with_items: '{{ packages }}'
+      when: ansible_os_family == 'Red Hat'
