@@ -3,22 +3,27 @@
   become: true
   vars:
       packages:
-      - zeek
-      - suricata
-      - net-tools
+        - name: zeek
+          required: True
+        - name: suricata
+          required: True
+        - name: net-tools
+          required: True
   tasks:
     - name: Install security tools on Debian systems
       apt:
-         latest: present
+         name: Debian
+         state: latest
          update_cache: yes
-      with_items: '{{ packages }}'
+      loop: '{{ packages }}'
+      when: item.required == True
       when: ansible_os_family == 'Debian'
-
-
 
     - name: Install security tools on RedHat systems
       yum:
-         latest: present
+         name: Red Hat
+         state: latest
          update_cache: yes
       with_items: '{{ packages }}'
+      when: item.required == True
       when: ansible_os_family == 'Red Hat'
