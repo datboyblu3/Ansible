@@ -6,21 +6,21 @@
   vars:
     - users.yaml
   tasks:
-      - name: Create a login user
-        user:
-          name: "{{ user }}"
-          password: "{{ password }}"
-          groups:
-            - sudo
-          state: present
-          
-      - name: Create users and add them to the security group
-      
+   
       - name: Adding security group
         group:
           name: Security
           state: present
           
+      - name: Create users and add them to the security group\
+        user:
+          name: "{{item.name}}"
+          create_home: yes
+          password: "{{ 'password' | password_hash('sha512') }}"
+          update_password: on_create
+          groups: security
+        with_items: "{{ users }}"
+    
       #- name: Add {{ user }} to sudoers file
        # ansible.builtin.lineinfile:
         #  path: /etc/sudoers
