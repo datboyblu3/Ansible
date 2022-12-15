@@ -4,8 +4,7 @@
   become: yes
   gather_facts: false
   vars:
-    - user: ansible
-    - password: ansible
+    - users.yaml
   tasks:
       - name: Create a login user
         user:
@@ -15,12 +14,19 @@
             - sudo
           state: present
           
-      - name: Add {{ user }} to sudoers file
-        ansible.builtin.lineinfile:
-          path: /etc/sudoers
-          regexp: '^{{ user }}'
-          line: '{{ user }} ALL=(ALL) NOPASSWD: ALL'
-          validate: 'visudo -cf %s'
+      - name: Create users and add them to the security group
+      
+      - name: Adding security group
+        group:
+          name: Security
+          state: present
+          
+      #- name: Add {{ user }} to sudoers file
+       # ansible.builtin.lineinfile:
+        #  path: /etc/sudoers
+         # regexp: '^{{ user }}'
+          #line: '{{ user }} ALL=(ALL) NOPASSWD: ALL'
+          #validate: 'visudo -cf %s'
           
       - name: Allow public key authentication
         ansible.builtin.lineinfile:
