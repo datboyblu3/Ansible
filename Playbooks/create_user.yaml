@@ -29,11 +29,11 @@
           line: 'PubkeyAuthentication yes'
           state: present
           
-      #- name: Create SSH directory if it does not exist
-        #ansible.builtin.file:
-          #path: '~/.ssh/'
-          #state: directory
-          #mode: '0600'
+      - name: Create SSH directory if it does not exist
+        ansible.builtin.file:
+          path: '~/.ssh/'
+          state: directory
+          mode: '0600'
 
       - name: Add public key to authorized_keys
         authorized_key:
