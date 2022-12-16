@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  vars:
+      packages:
+      - zeek
+      - suricata
+      - net-tools
+  tasks:
+    - name: Install security tools on Debian systems
+      apt:
+         latest: present
+         update_cache: yes
+      with_items: '{{ packages }}'
+      when: ansible_os_family == 'Debian'
+
+    - name: Install security tools on RedHat systems 
+      yum:
+         latest: present
+         update_cache: yes
+      with_items: '{{ packages }}'
+      when: ansible_os_family == 'Red Hat'
+
