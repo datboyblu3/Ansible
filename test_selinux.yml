@@ -2,9 +2,10 @@
 - hosts: all
   tasks:
 
-    - name: Enable SELinux
+    - name: Enforcing SELinux
       ansible.posix.selinux:
-       state: enabled
+       policy: targeted
+       state: enforcing
 
 
     - name: Set SELinux to Permissive mode
