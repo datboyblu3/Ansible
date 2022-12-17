@@ -1,8 +1,8 @@
 ---
 - hosts: all
   become: true
-  vars:
-    - se_pkg.yml
+  vars_files: 
+   - se_pkg.yml
 
   tasks:
    - name: Installing SELinux dependencies on Ubuntu
@@ -12,7 +12,7 @@
          update_cache: yes
      with_items: '{{ packages }}'
      when: item.required == True
-     when: ansible_os_family == 'Ubuntu'
+     when: ansible_os_family == 'Debian'
 
 
    - name: Installing SELinux dependencies on CentOS
@@ -22,4 +22,4 @@
          update_cache: yes
      with_items: '{{ packages }}'
      when: item.required == True
-     when: ansible_os_family == 'CentOS'
+     when: ansible_os_family == 'RedHat'
