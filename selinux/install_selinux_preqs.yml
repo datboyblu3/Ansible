@@ -6,13 +6,14 @@
 
  tasks:
          - name: Debian: Installing SELinux dependencies
+         - file: dest=/selinux/se_pkg.yml state=directory
       apt:
          name: Debian
          state: latest
          update_cache: yes
       loop: '{{ packages }}'
       when: item.required == True
-      when: ansible_os_family == 'Debian'
+      when: ansible_os_family == 'Ubuntu'
 
         - name: CentOS: Installing SELinux dependencies
       yum:
@@ -21,4 +22,4 @@
          update_cache: yes
       with_items: '{{ packages }}'
       when: item.required == True
-      when: ansible_os_family == 'Red Hat'
+      when: ansible_os_family == 'CentOS'
