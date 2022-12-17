@@ -1,6 +1,12 @@
 ---
 - hosts: all
   tasks:
+  
+    - name: Install SELinux Required Packages
+      yum:
+        name:
+          - "python3-libselinux"
+          - "policycoreutils-python-utils"
 
     - name: Enforcing SELinux
       ansible.posix.selinux:
