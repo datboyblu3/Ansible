@@ -1,14 +1,14 @@
 packages:
-        - name: policycoreutils
-        - name: selinux-policy
-        - name: selinux-policy-targeted
-        - name: libselinux
-        - name: libselinux-utils
-        - name: libselinux-python
-        - name: policy-devel
-        - name: selinux-policy-doc
-        - name: selinux-policy-mls
-        - name: Settroubleshot
-        - name: setroubleshoot-server
-        - name: mcstrans
-        - name: policycoreutils-python
+          name: policycoreutils
+          name: selinux-policy
+          name: selinux-policy-targeted
+          name: libselinux
+          name: libselinux-utils
+          name: libselinux-python
+          name: policy-devel
+          name: selinux-policy-doc
+          name: selinux-policy-mls
+          name: Settroubleshot
+          name: setroubleshoot-server
+          name: mcstrans
+          name: policycoreutils-python

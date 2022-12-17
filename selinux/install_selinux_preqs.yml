@@ -4,24 +4,22 @@
   vars:
     - se_pkg.yml
 
- tasks:
-   - name: Debian: Installing SELinux dependencies
-   - file: dest=/selinux/se_pkg.yml state=directory
-      apt:
+  tasks:
+   - name: Installing SELinux dependencies on Ubuntu
+     apt:
          name: Debian
          state: latest
          update_cache: yes
-      with_items: '{{ packages }}'
-      when: item.required == True
-      when: ansible_os_family == 'Ubuntu'
+     with_items: '{{ packages }}'
+     when: item.required == True
+     when: ansible_os_family == 'Ubuntu'
 
 
-    - name: CentOS: Installing SELinux dependencies
-    - file: dest=/selinux/se_pkg.yml state=directory
-      yum:
+   - name: Installing SELinux dependencies on CentOS
+     yum:
          name: Red Hat
          state: latest
          update_cache: yes
-      with_items: '{{ packages }}'
-      when: item.required == True
-      when: ansible_os_family == 'CentOS'
+     with_items: '{{ packages }}'
+     when: item.required == True
+     when: ansible_os_family == 'CentOS'
