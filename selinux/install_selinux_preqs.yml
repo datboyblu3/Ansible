@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: true
+  vars:
+    - se_pkg.yml
+
+ tasks:
+         - name: Debian: Installing SELinux dependencies
+      apt:
+         name: Debian
+         state: latest
+         update_cache: yes
+      loop: '{{ packages }}'
+      when: item.required == True
+      when: ansible_os_family == 'Debian'
+
+        - name: CentOS: Installing SELinux dependencies
+      yum:
+         name: Red Hat
+         state: latest
+         update_cache: yes
+      with_items: '{{ packages }}'
+      when: item.required == True
+      when: ansible_os_family == 'Red Hat'
