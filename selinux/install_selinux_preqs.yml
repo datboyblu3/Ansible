@@ -5,21 +5,16 @@
    - se_pkg.yml
 
   tasks:
+
    - name: Installing SELinux dependencies on Ubuntu
      apt:
-         name: Debian
-         state: latest
          update_cache: yes
      with_items: '{{ packages }}'
-     when: item.required == True
      when: ansible_os_family == 'Debian'
 
 
    - name: Installing SELinux dependencies on CentOS
      yum:
-         name: Red Hat
-         state: latest
          update_cache: yes
      with_items: '{{ packages }}'
-     when: item.required == True
      when: ansible_os_family == 'RedHat'
