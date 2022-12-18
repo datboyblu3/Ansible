@@ -8,4 +8,5 @@ Ansible playbooks to create and manage users on linux systems for security purpo
 - install_nginx.yaml will install the nginx tool
 - create_user.yaml file creates users, creates an SSH directory is one doesn't already exists, copies public keys from control node, enables public key authentication and adds users to sudoders file
 - users.yaml contains a file of users
-- selinux directory contains playbooks to manage SELinux
+- selinux directory contains playbooks to manage SELinux, ensuring each machine is operating with baseline security policies
+- Commands.md contains a list of common commands and helpful resources to help you configure and manage your Ansible deployment
