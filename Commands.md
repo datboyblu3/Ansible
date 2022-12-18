@@ -175,39 +175,49 @@ Verify disk usage
 ansible all -i inventory -a "df -h"
 ```
 
-### 
+# Execute Playbooks to Automate Server Setup
+
+## Listing Playbook Tasks
 
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml --list-tasks
 ```
 
-### 
+## Listing Playbook Tags
 
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml --list-tags
 ```
 
-### 
+## Executing Tasks by Tag
 
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml --tags=setup
 ```
 
-### 
+## Skipping Tasks by Tag
 
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml --exclude-tags=setup
 ```
 
-### 
+## Starting Execution at Specific Task
 
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml --start-at-task=Copy index page
 ```
 
-### 
+## Limiting Targets for Execution
 
 ``` JavaScript
+ansible-playbook -l dev -i inventory playbook.yml
 ```
 
-### 
+## Controlling Output Verbosity
 
+Options: -vv or -vvv. Use -vvvv to get connection debugging information
 ``` JavaScript
+ansible-playbook -i inventory playbook.yml -v
 ```
 
 ### 
