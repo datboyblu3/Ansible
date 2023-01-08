@@ -6,6 +6,13 @@
   tasks:
     - name: Download the latest Splunk Forwarder RPM
       ansible.builtin.get_url:
-              url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-armv8.rpm"
+              url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
               dest: /opt/splunkforwarder
-              checksum: 0f8323bc9c3ccec5dc00e1cc13b1dbc9
+              checksum: 2e4684a853569aeb0de3c1e8ddf86dfe
+
+    - name: Install Splunk Forwarder on Debian nodes
+      apt:
+          state: present
+          update_cache: yes
+          when: item.required == True
+          when: ansible_os_family == "Debian"
