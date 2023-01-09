@@ -16,3 +16,9 @@
           update_cache: yes
           when: item.required == True
           when: ansible_os_family == "Debian"
+
+
+    - name: Download and insert props.conf template
+      ansible.builtin.get_url:
+              url: "https://github.com/wazuh/wazuh/blob/master/extensions/splunk/props.conf"
+              dest: /opt/splunkforwarder
