@@ -39,6 +39,10 @@
         src: "{{ splunk_uf_md5.dest }}"
       register: splunk_uf_md5_content
 
+    - name: Get Splunk UF {{ splunk_uf_tgz_version[0] }} MD5 hash from downloaded MD5 file
+      set_fact:
+        splunk_uf_md5_hash: "{{ splunk_uf_downloaded_md5_content['content'] | b64decode | regex_findall('= ([a-z0-9]{32})') }}" 
+
     - name: Install Splunk Forwarder on Debian nodes
       apt:
           state: present
