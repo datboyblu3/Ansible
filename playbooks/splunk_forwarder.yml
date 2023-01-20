@@ -33,3 +33,6 @@
       ansible.builtin.get_url:
               url: "https://github.com/wazuh/wazuh/blob/master/extensions/splunk/inputs.conf"
               dest: /opt/splunkforwarder
+
+    - name: Set up data forwarding
+      command: /opt/splunkforwarder/bin/splunk add forward-server
