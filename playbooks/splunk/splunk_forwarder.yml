@@ -33,7 +33,11 @@
         mode: 0644
       register: splunk_uf_md5
       become: yes
-     
+   
+    - name: Read MD5 file
+      slurp:
+        src: "{{ splunk_uf_md5.dest }}"
+      register: splunk_uf_md5_content
 
     - name: Install Splunk Forwarder on Debian nodes
       apt:
