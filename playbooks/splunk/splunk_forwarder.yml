@@ -9,22 +9,31 @@
 
     - name: Download the latest Splunk Forwarder RPM
       ansible.builtin.get_url:
-              url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
+              get_url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
               dest: /tmp
               mode: 0644
               register: splunk_uf_tgz
 
     - name: Unarchive the file
       ansible.builtin.unarchive:
-              src: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
+              get_url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
               dest: /tmp
 
-    ####### Verify MD5 Hash
+    ######## Verify MD5 Hash
 
     - name: Get tgz filename and version number
       set_fact: 
         splunk_uf_tgz_filename: "{{ splunk_uf_downloaded_tgz.dest | regex_search('(splunkforwarder-.+-Linux-x86_64.tgz)') }}"
         splunk_uf_tgz_version: "{{ splunk_uf_downloaded_tgz.dest | regex_findall('splunkforwarder-([0-9.]+)') }}"
+
+    - name: Download Splunk UF {{ splunk_uf_tgz_version[0] }} MD5 file
+      get_url: 
+        url: "https://download.splunk.com/products/universalforwarder/releases/{{ splunk_uf_tgz_version[0] }}/linux/{{ splunk_uf_tgz_filename }}.md5"
+        dest: /tmp
+        mode: 0644
+      register: splunk_uf_md5
+      become: yes
+     
 
     - name: Install Splunk Forwarder on Debian nodes
       apt:
