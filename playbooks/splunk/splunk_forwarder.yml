@@ -7,7 +7,7 @@
 
     ######## Download Splunk UF
 
-    - name: Download the latest Splunk Forwarder RPM
+    - name: Download the latest Splunk Forwarder tgz
       ansible.builtin.get_url:
               get_url: "https://download.splunk.com/products/universalforwarder/releases/9.0.3/linux/splunkforwarder-9.0.3-dd0128b1f8cd-Linux-x86_64.tgz"
               dest: /tmp
@@ -23,8 +23,8 @@
 
     - name: Get tgz filename and version number
       set_fact: 
-        splunk_uf_tgz_filename: "{{ splunk_uf_downloaded_tgz.dest | regex_search('(splunkforwarder-.+-Linux-x86_64.tgz)') }}"
-        splunk_uf_tgz_version: "{{ splunk_uf_downloaded_tgz.dest | regex_findall('splunkforwarder-([0-9.]+)') }}"
+        splunk_uf_tgz_filename: "{{ splunk_uf_tgz.dest | regex_search('(splunkforwarder-.+-Linux-x86_64.tgz)') }}"
+        splunk_uf_tgz_version: "{{ splunk_uf_tgz.dest | regex_findall('splunkforwarder-([0-9.]+)') }}"
 
     - name: Download Splunk UF {{ splunk_uf_tgz_version[0] }} MD5 file
       get_url: 
