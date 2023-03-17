@@ -3,8 +3,9 @@
   hosts: remote-server
   become: yes
   gather_facts: false
-  vars:
-    - users.yaml
+  vars: 
+   - users.yaml
+
   tasks:
    
       - name: Adding security group
